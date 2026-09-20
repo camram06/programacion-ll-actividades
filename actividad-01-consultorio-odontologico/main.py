@@ -27,7 +27,7 @@ def registrar_cliente(lista_clientes):
     print("Cliente registrado. Total a pagar:", formato_pesos(cliente.total_a_pagar))
 
 
-# Calcula y muestra los 3 resultados que pide el enunciado
+# Calcula y muestra los 3 resultados que pide el enunciado 
 def mostrar_resumen(lista_clientes):
     total_clientes = len(lista_clientes)
     ingresos_totales = 0
@@ -42,7 +42,6 @@ def mostrar_resumen(lista_clientes):
     print("Total de clientes:", total_clientes)
     print("Ingresos totales:", formato_pesos(ingresos_totales))
     print("Clientes que van a extracción:", clientes_extraccion)
-
 
 # ============================================================
 # PROGRAMA PRINCIPAL

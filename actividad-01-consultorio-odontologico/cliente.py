@@ -21,7 +21,7 @@ class Cliente:
         self.valor_atencion = valor_unitario * cantidad
         self.total_a_pagar = self.valor_cita + self.valor_atencion
 
-    # Muestra por consola todos los datos del cliente
+    # Muestra por consola todos los datos del cliente 
     def mostrar(self):
         print(f"  Cédula: {self.cedula} | Nombre: {self.nombre} | Tel: {self.telefono}")
         print(f"  {self.tipo_cliente} | {self.tipo_atencion} x{self.cantidad} | "

@@ -3,8 +3,6 @@ from validaciones import (pedir_nombre, pedir_cedula, pedir_telefono,
                           pedir_opcion, pedir_cantidad, pedir_fecha)
 from ordenamiento_busqueda import ordenar_por_valor_atencion, buscar_cliente_por_cedula
 
-
-# Pide todos los datos de un cliente, crea el objeto y lo agrega a la lista
 def registrar_cliente(lista_clientes):
     print("\n--- Registrar cliente ---")
     cedula = pedir_cedula(lista_clientes)
@@ -18,7 +16,7 @@ def registrar_cliente(lista_clientes):
         cantidad = 1
         print("Cantidad asignada automáticamente: 1")
     else:
-        cantidad = pedir_cantidad()  # calzas y extracción: cualquier número > 0
+        cantidad = pedir_cantidad()
 
     prioridad = pedir_opcion("Prioridad de atención:", ["Normal", "Urgente"])
     fecha = pedir_fecha()
@@ -31,9 +29,9 @@ def registrar_cliente(lista_clientes):
 
 # Calcula y muestra los 3 resultados que pide el enunciado
 def mostrar_resumen(lista_clientes):
-    total_clientes = len(lista_clientes)  # 1. Total de clientes
-    ingresos_totales = 0                  # 2. Ingresos totales (acumulador)
-    clientes_extraccion = 0               # 3. Clientes que van a extracción (contador)
+    total_clientes = len(lista_clientes)
+    ingresos_totales = 0
+    clientes_extraccion = 0
 
     for cliente in lista_clientes:
         ingresos_totales += cliente.total_a_pagar

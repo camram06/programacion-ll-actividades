@@ -1,21 +1,7 @@
-'''
-Consultorio Odontológico - Plan de contingencia para extracciones urgentes
-- Uso de una Cola (FIFO) para la agenda general de atención diaria.
-- Uso de una Pila (LIFO) para las urgencias de extracción dental,
-  ordenada de la fecha de cita más cercana a la más lejana.
-
-Manejo de errores incluido:
-- Campos de texto vacíos o con solo espacios en blanco.
-- Opciones de menú que no correspondan a un número entero.
-- Opciones de menú fuera del rango permitido.
-- Fecha de cita con un formato o valor inválido.
-'''
-
 from datetime import datetime
 
 from cliente import Cliente
 from consultorio import Consultorio
-
 
 def solicitar_nombre():
     while True:
@@ -24,7 +10,6 @@ def solicitar_nombre():
             print("ERROR: El nombre no puede estar vacío ni contener solo espacios.")
         else:
             return nombre.strip()
-
 
 def solicitar_opcion_entero(mensaje, minimo, maximo):
     while True:
@@ -40,7 +25,6 @@ def solicitar_opcion_entero(mensaje, minimo, maximo):
         else:
             return opcion
 
-
 def solicitar_tipo_atencion():
     opciones_tipo_atencion = {
         1: "Extracción",
@@ -54,7 +38,6 @@ def solicitar_tipo_atencion():
 
     opcion = solicitar_opcion_entero("Seleccione una opción: ", 1, len(opciones_tipo_atencion))
     return opciones_tipo_atencion[opcion]
-
 
 def solicitar_prioridad():
     opciones_prioridad = {
@@ -79,14 +62,12 @@ def solicitar_fecha_cita():
             continue
 
         try:
-            # Se usa solo para VALIDAR que sea una fecha real y bien escrita
             datetime.strptime(fecha_texto, "%Y-%m-%d")
         except ValueError:
             print("ERROR: Fecha inválida. Use el formato AAAA-MM-DD, por ejemplo 2026-10-05.")
             continue
 
         return fecha_texto
-
 
 def registrar_cliente(consultorio: Consultorio):
     print("\n--- Registrar cliente en la agenda ---")
@@ -99,7 +80,6 @@ def registrar_cliente(consultorio: Consultorio):
     consultorio.agendar_cliente(cliente)
     print(f"Cliente '{nombre}' agendado correctamente.")
 
-
 def mostrar_menu():
     print("\n----- CONSULTORIO ODONTOLÓGICO -----")
     print("1. Registrar cliente en la agenda (Cola)")
@@ -110,7 +90,6 @@ def mostrar_menu():
     print("6. Atender siguiente urgencia de extracción (Pila)")
     print("7. Generar informe de la pila de urgencias")
     print("8. Salir")
-
 
 def main():
     consultorio = Consultorio("Consultorio Odontológico Sonrisa Sana")
@@ -143,7 +122,6 @@ def main():
         elif opcion == 8:
             print("Saliendo del sistema del consultorio...")
             break
-
 
 if __name__ == "__main__":
     main()

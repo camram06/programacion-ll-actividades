@@ -4,14 +4,6 @@ from cliente import Cliente
 
 
 class Consultorio:
-    """
-    Maneja dos estructuras de datos lineales:
-    - cola_atencion_general: Cola (FIFO), la agenda diaria del consultorio.
-      El primer cliente registrado es el primero en ser atendido.
-    - pila_urgencias_extraccion: Pila (LIFO), los clientes que tienen
-      extracción dental Y prioridad Urgente. El tope de la pila siempre
-      es el cliente con la fecha de cita más cercana.
-    """
 
     def __init__(self, nombre):
         self.nombre = nombre
@@ -23,11 +15,9 @@ class Consultorio:
     # ------------------------------------------------------------------
 
     def agendar_cliente(self, cliente: Cliente):
-        # Encolar: el cliente entra por el final de la cola (append)
         self.cola_atencion_general.append(cliente)
 
     def atender_siguiente_cliente(self):
-        # Des-encolar: se atiende y se retira quien está de primero (popleft)
         if self.cola_atencion_general:
             cliente = self.cola_atencion_general.popleft()
             print(f"Atendiendo a: {cliente.nombre} "
@@ -58,7 +48,6 @@ class Consultorio:
     # ------------------------------------------------------------------
 
     def generar_pila_urgencias_extraccion(self):
-        # Se filtran de la agenda solo los clientes de extracción con prioridad urgente
         clientes_urgentes = []
         for cliente in self.cola_atencion_general:
             if cliente.tipo_atencion == "Extracción" and cliente.prioridad == "Urgente":
@@ -70,9 +59,6 @@ class Consultorio:
             print("No se encontraron clientes de extracción con prioridad urgente en la agenda.")
             return
 
-        # Se ordena de la fecha MÁS LEJANA a la MÁS CERCANA.
-        # Al apilar (append) en ese orden, el último en entrar -la fecha más
-        # cercana- queda en el tope de la pila, que es quien debe ser llamado primero.
         clientes_urgentes.sort(key=lambda cliente: cliente.fecha_cita, reverse=True)
 
         for cliente in clientes_urgentes:
@@ -81,7 +67,6 @@ class Consultorio:
         print(f"Pila de urgencias generada con {len(self.pila_urgencias_extraccion)} cliente(s).")
 
     def atender_siguiente_urgencia(self):
-        # Desapilar: se retira el elemento del tope (pop), que es la fecha más cercana
         if self.pila_urgencias_extraccion:
             cliente = self.pila_urgencias_extraccion.pop()
             print(f"Llamando con urgencia a: {cliente.nombre} (fecha de cita: {cliente.fecha_cita})")
@@ -96,7 +81,6 @@ class Consultorio:
 
         print("\n=== INFORME: PILA DE URGENCIAS DE EXTRACCIÓN ===")
         print("Orden en que deben ser llamados (de la fecha más cercana a la más lejana):")
-        # reversed() recorre la pila del tope hacia el fondo, sin desapilarla
         for posicion, cliente in enumerate(reversed(self.pila_urgencias_extraccion), start=1):
             print(f"{posicion}. {cliente.nombre} | Fecha de cita: {cliente.fecha_cita}")
         print("=" * 50)
